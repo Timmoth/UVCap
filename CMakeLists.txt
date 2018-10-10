@@ -18,11 +18,13 @@ set(Qt5_DIR "/home/timmoth/Qt/5.11.2/gcc_64/lib/cmake")
 
 set(HEADER_FILES
     "headers/mainwindow.h"
+    "headers/uvc_thread.h"
     )
 
 set(SRC_FILES
     "src/main.cpp"
     "src/mainwindow.cpp"
+    "src/uvc_thread.cpp"
     )
 
 set(UI_FILES
@@ -43,11 +45,19 @@ add_executable(UVCCap
 
 target_include_directories(UVCCap PRIVATE ${CMAKE_CURRENT_BINARY_DIR})
 
-target_include_directories(UVCCap PRIVATE "headers")
-target_include_directories(UVCCap PRIVATE "forms")
+target_include_directories(UVCCap PRIVATE "headers" "forms")
 
-target_link_libraries(UVCCap
-    PUBLIC
+target_include_directories(UVCCap PUBLIC 
+    "/usr/local/include"
+    "/usr/include"
+    )
+
+target_link_libraries(UVCCap 
+    "/usr/local/lib/x86_64-linux-gnu/libuvc.so"
+    "/usr/local/lib/libusb-1.0.so"
+    "/usr/local/lib/libopencv_core.so"
+    "/usr/local/lib/libopencv_highgui.so"
     Qt5::Core
     Qt5::Gui
-    Qt5::Widgets)
+    Qt5::Widgets
+)

@@ -2,6 +2,11 @@
 
 #include <QMainWindow>
 #include <QDebug>
+#include <QMetaType>
+#include <QStandardItemModel>
+#include <QProcess>
+
+#include <uvc_thread.h>
 
 namespace Ui {
 	class MainWindow;
@@ -16,5 +21,13 @@ public:
 
 private:
 	Ui::MainWindow *ui;
+	QElapsedTimer timer;
+	UVCThread *currentFeed;
+
+public slots:
+    void onImageReceived(QImage);
+
+private slots:
+	void StartButtonClicked();
 
 };
